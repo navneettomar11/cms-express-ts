@@ -1,22 +1,33 @@
-import {Table, Column, Model, PrimaryKey, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import { Entity, PrimaryColumn, Column, BeforeInsert } from "typeorm";
+import {Md5} from "md5-typescript";
 
-export enum USERTYPE{
-    ADMIN = "ADMIN"
-}
+@Entity({name: 'users'})
+export default class User  {
 
-@Table
-export class User extends Model<User> {
+    @PrimaryColumn()
+    public email: string;
 
-    @PrimaryKey
-    @Column
-    email: string;
+    @Column({type:'varchar'})
+    public firstName: string;
 
-    @Column
-    firstName: string;
+    @Column({type:'varchar'})
+    public lastName: string;
 
-    @Column
-    lastName: string;
+    @Column({type:'varchar'})
+    public userType: string;
 
-    @Column
-    type: USERTYPE;
+    @Column({type: 'varchar', name: 'passwd'})
+    public password: string;
+
+    constructor(email:string, firstName: string, lastName: string, userType: string = 'USER'){
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userType = userType;
+    }
+
+    @BeforeInsert()
+    public getSaltPassword(){
+        this.password = Md5.init(this.password);
+    }
 }

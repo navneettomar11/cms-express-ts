@@ -8,7 +8,8 @@
     "compilerOptions": {
       "module": "commonjs",
       "noImplicitAny": true,
-      "target": "es6",
+      "target": "es5",
+      "lib":["es2016","dom"],
       "outDir": "dist",
       "rootDir": "server",
       "sourceMap": true,
