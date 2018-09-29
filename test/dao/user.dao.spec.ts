@@ -1,10 +1,12 @@
 import {assert} from 'chai';
+import { Connection } from 'typeorm';
 import { initializeFunction } from '../../server/typeorm.config';
 import User from '../../server/models/user.model';
 import {UserDao} from '../../server/dao/user.dao';
 
-let userDao:UserDao;
 
+let userDao:UserDao;
+let connection:Connection;
 const createUser = async (email:string, firstName:string ,lastName:string, password: string) =>{
     let user = new User();
     user.email = email;
@@ -13,9 +15,10 @@ const createUser = async (email:string, firstName:string ,lastName:string, passw
     user.lastName = lastName;
     return await userDao.save(user);
 }
+
 describe('User Repository', ()=>{
     before( async ()=>{
-        await initializeFunction();
+        connection = await initializeFunction();
         userDao = new UserDao();
 
     });
@@ -39,5 +42,9 @@ describe('User Repository', ()=>{
     it('compare password with wrong pwd', async ()=>{
         let comparePwdBoolean = await userDao.comparePassword('xyz');
         assert.isFalse(comparePwdBoolean);
+    });
+
+    after(()=>{
+        connection.close();
     });
 });

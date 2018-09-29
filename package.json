@@ -60,10 +60,14 @@
       ".tsx"
     ],
     "exclude": [
-      "**/*.d.ts"
+      "**/*.d.ts",
+      "dist",
+      "test",
+      "coverage"
     ],
     "reporter": [
-      "html"
+      "html",
+      "text"
     ],
     "all": true  
   }
