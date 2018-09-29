@@ -1,0 +1,22 @@
+[{
+    "name": "default",
+    "type": "mysql",
+    "host": "localhost",
+    "username": "cms_express_ts",
+    "password": "cms_express_ts",
+    "database": "cms_express_ts",
+    "port": 3306,
+    "synchronize": true,
+    "logging": true
+},{
+    "name": "test",
+    "type": "mysql",
+    "host": "localhost",
+    "username": "cms_express_ts",
+    "password": "cms_express_ts",
+    "database": "cms_express_ts_test",
+    "port": 3306,
+    "synchronize": true,
+    "logging": false,
+    "dropSchema": true
+}]

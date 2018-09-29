@@ -5,7 +5,10 @@ import { TemplateParameter, sendMailFromTemplate } from "../mailtemplates/sendma
 import { UserDao } from "../dao/user.dao";
 
 export class UserService {
+    
+    constructor(private userDao:UserDao){
 
+    }
     public register(user:User): Promise<string>{
         return new Promise((resolve, reject) => {
             validate(user).then((errors)=>{
@@ -18,7 +21,7 @@ export class UserService {
                     });
                     reject(new ValidationListException(validationErrors));
                 }else{
-                    UserDao.save(user).then((user)=>{
+                    this.userDao.save(user).then((user)=>{
                         let templateParameters:Array<TemplateParameter> = [];
                         templateParameters.push({name:'registration-validation-uuid',value: user.guid});
                         sendMailFromTemplate('registration-validation', templateParameters,{to:user.email, from:'register@ncms.com'})
@@ -33,7 +36,7 @@ export class UserService {
 
     public getUser(email:string):Promise<User>{
         return new Promise((resolve, reject)=>{
-            UserDao.findOne(email).then((user)=>{
+            this.userDao.findOne(email).then((user)=>{
                 resolve(user);
             }, (error)=>{
                 reject(new UserNotFoundException('Email not found.'))

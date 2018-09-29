@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
 import User from '../models/user.model';
-import { validate, ValidationError } from 'class-validator';
 import { UserDao } from '../dao/user.dao';
-import { ValidationException, SQLException, Exception } from '../utils/expection';
-import { sendMailFromTemplate, TemplateParameter } from '../mailtemplates/sendmail';
+import { Exception } from '../utils/expection';
 import { UserService } from '../services/user-service';
 
-const userService: UserService = new UserService();
+const userService: UserService = new UserService(new UserDao());
 
 export let register = (req: Request, res: Response) =>{
     let user  = new User();

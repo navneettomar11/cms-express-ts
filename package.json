@@ -5,8 +5,9 @@
   "main": "./dist/server.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "npm run build && node ./dist/server.js",
-    "test": "nyc mocha --reporter spec --compilers ts:ts-node/register 'test/**/*.spec.ts'"
+    "start": "NODE_ENV=development npm run build && node ./dist/server.js",
+    "test": "NODE_ENV=test mocha --timeout 5000 --reporter spec --compilers ts:ts-node/register 'test/**/*.spec.ts'",
+    "test-with-coverage": "NODE_ENV=test nyc mocha --timeout 5000 --reporter spec --compilers ts:ts-node/register 'test/**/*.spec.ts'"
   },
   "keywords": [
     "Content",
@@ -52,5 +53,18 @@
     "passport-http": "^0.3.0",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.2.7"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true  
   }
 }

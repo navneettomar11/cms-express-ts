@@ -1,11 +1,12 @@
 import { ValidatorConstraintInterface, ValidationArguments, ValidationOptions, registerDecorator, ValidatorConstraint } from "class-validator";
 import { UserDao } from "../dao/user.dao";
 
+const userDao:UserDao = new UserDao();
 @ValidatorConstraint({ async: true })
 export class IsEmailAlreadyExistConstraint implements ValidatorConstraintInterface{
 
     validate(email: string, args: ValidationArguments) {
-        return  UserDao.findOne(email).then( user => {
+        return  userDao.findOne(email).then( user => {
             if (user) return false;
             return true;
         });

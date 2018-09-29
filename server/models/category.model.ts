@@ -9,5 +9,6 @@ export class Category {
     @Column()
     public name:string;
 
+    
 
 }
