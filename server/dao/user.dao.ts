@@ -1,24 +1,24 @@
-import User from "../models/user.model";
 import {getRepository } from "typeorm";
+import User from "../models/user.model";
 
 export class UserDao {
-    
-    public async save(user: User): Promise<User>{
-        let userRepositry = getRepository(User);
+
+    public async save(user: User): Promise<User> {
+        const userRepositry = getRepository(User);
         return await userRepositry.save(user);
     }
 
-    public  async findOne(userEmail:string):Promise<User>{
-        let userRepositry = getRepository(User);
-        return await userRepositry.findOne({email: userEmail})
+    public  async findOne(userEmail: string): Promise<User> {
+        const userRepositry = getRepository(User);
+        return await userRepositry.findOne({email: userEmail});
     }
 
-    public async comparePassword(password:string):Promise<Boolean>{
-        let userRepositry = getRepository(User);
-        let count = await userRepositry.createQueryBuilder('user')
-        .where('user.password = md5(:pwd)',{pwd: password})
+    public async comparePassword(password: string): Promise<boolean> {
+        const userRepositry = getRepository(User);
+        const count = await userRepositry.createQueryBuilder("user")
+        .where("user.password = md5(:pwd)", {pwd: password})
         .getCount();
-        return count > 0
+        return count > 0;
     }
 
 }

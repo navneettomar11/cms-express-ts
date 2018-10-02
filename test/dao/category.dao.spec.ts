@@ -72,8 +72,7 @@ import { Category } from '../../server/models/category.model';
 
     it('get subcategories', async ()=>{
         let parentCategory = await categoryDao.getCategoryByTitle('category02');
-        let subcategories = await categoryDao.saveCategories([createCategoryFixture_02('subcategory01','subcategory01',1, parentCategory),createCategoryFixture_02('subcategory02','subcategory02',2, parentCategory)]);
-        console.log(parentCategory, subcategories);
+        await categoryDao.saveCategories([createCategoryFixture_02('subcategory01','subcategory01',1, parentCategory),createCategoryFixture_02('subcategory02','subcategory02',2, parentCategory)]);
         let getSubcategories:Array<Category> = await categoryDao.getSubCategories(parentCategory.id);
         assert.isNotNull(getSubcategories);
         assert.isTrue(getSubcategories.length === 2);
@@ -81,6 +80,7 @@ import { Category } from '../../server/models/category.model';
 
     after(()=>{
         connection.close();
+        connection = null;
     });
 
  });

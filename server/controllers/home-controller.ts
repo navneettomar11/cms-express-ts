@@ -1,13 +1,7 @@
-import { Request, Response } from 'express';
-
-let pkg = require(__dirname + '/../../package.json');
-
+import { Request, Response } from "express";
 
 export let index = (req: Request, res: Response) => {
-  
-
   res.json({
-    message: 'Welcome to API sekeleton.',
-    version: pkg.version,
+    message: "Welcome to API sekeleton.",
   });
-}
+};

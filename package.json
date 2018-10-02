@@ -7,7 +7,8 @@
     "build": "webpack --config webpack.config.js",
     "start": "NODE_ENV=development npm run build && node ./dist/server.js",
     "test": "NODE_ENV=test mocha --timeout 5000 --reporter spec --compilers ts:ts-node/register 'test/**/*.spec.ts'",
-    "test-with-coverage": "NODE_ENV=test nyc mocha --timeout 5000 --reporter spec --compilers ts:ts-node/register 'test/**/*.spec.ts'"
+    "test-with-coverage": "NODE_ENV=test nyc mocha --timeout 5000 --reporter spec --compilers ts:ts-node/register 'test/**/*.spec.ts'",
+    "lint" : "./node_modules/tslint/bin/tslint -p tsconfig.json"
   },
   "keywords": [
     "Content",
@@ -69,6 +70,6 @@
       "html",
       "text"
     ],
-    "all": true  
+    "all": true
   }
 }

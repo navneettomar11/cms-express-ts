@@ -1,23 +1,21 @@
-import { PrimaryGeneratedColumn, Column, Entity, JoinColumn,  ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn,  ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'categories'})
+@Entity({name: "categories"})
 export class Category {
 
     @PrimaryGeneratedColumn()
-    public id:number;
+    public id: number;
 
     @Column()
-    public title:string;
+    public title: string;
 
     @Column()
-    public description:string;
+    public description: string;
 
     @Column()
-    public order:number;
+    public order: number;
 
-    @ManyToOne(type => Category)
+    @ManyToOne( (type) => Category)
     @JoinColumn()
-    public parent:Category;
-    
-
+    public parent: Category;
 }

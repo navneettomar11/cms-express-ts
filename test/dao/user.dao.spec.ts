@@ -46,5 +46,6 @@ describe('User Repository', ()=>{
 
     after(()=>{
         connection.close();
+        connection = null;
     });
 });
